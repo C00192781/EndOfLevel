@@ -16,10 +16,15 @@ void Game::Initialize()
 	
 	rect.x = 0;
 	rect.y = 0;
-	rect.h = 600;
-	rect.w = 600;
+	rect.h = 650;
+	rect.w = 433;
 
 	myTexture.loadFromFile("texture.png", renderer);
+	
+}
+
+void Game::Render()
+{
 	SDL_RenderCopy(renderer, myTexture.getTexture(), &rect, &rect);
 	SDL_RenderPresent(renderer);
 }

@@ -22,6 +22,7 @@ int main()
 	while (game->IsRunning())
 	{
 		game->Update();
+		game->Render();
 		//game->HandleEvents();
 		//game->FrameHandler();
 	}

@@ -40,7 +40,7 @@ public:
 	//void FrameHandler();
 
 	void Update() {};
-	void Render() {};
+	void Render();
 	void CleanUp() {};
 
 	bool IsRunning()
