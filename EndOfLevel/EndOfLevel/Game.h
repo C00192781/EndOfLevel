@@ -3,6 +3,8 @@
 #include <SDL_image.h>
 #include <iostream>
 
+#include "Texture.h"
+
 #define fps 60
 #define window_width 1000
 #define window_height 800
@@ -15,14 +17,16 @@ private:
 
 	// used for rendering the current frame
 	SDL_Texture* texture = nullptr;
+	Texture myTexture;
+
+	
+
 	SDL_Renderer* renderer = nullptr;
 	SDL_Rect* currentRect;
 
 	SDL_Surface *screen;
 	Uint32 white;
 	Uint32 starting_tick;
-
-	int frame = 0;
 
 	//void FramerateHandler();
 
@@ -43,4 +47,8 @@ public:
 	{
 		return isRunning;
 	};
+
+
+
+	SDL_Rect rect;
 };

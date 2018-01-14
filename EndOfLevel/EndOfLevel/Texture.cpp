@@ -35,6 +35,11 @@ bool Texture::loadFromFile(std::string path, SDL_Renderer *renderer)
 	return m_texture;
 }
 
+SDL_Texture* Texture::getTexture()
+{
+	return m_texture;
+}
+
 int Texture::getWidth()
 {
 	return m_width;

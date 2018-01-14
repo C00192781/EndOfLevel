@@ -12,6 +12,7 @@ public:
 	~Texture();
 
 	bool loadFromFile(std::string path, SDL_Renderer *renderer);
+	SDL_Texture* getTexture();
 
 	int getWidth();
 	int getHeight();
