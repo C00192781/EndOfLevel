@@ -3,8 +3,6 @@
 #include <iostream>
 
 
-
-
 void Game::Initialize()
 {
 	isRunning = true; // used for while loop in main
