@@ -1,6 +1,6 @@
 #pragma once
-//#include <SDL.h>
-//#include <SDL_image.h>
+#include <SDL.h>
+#include <SDL_image.h>
 #include <iostream>
 
 #define fps 60
@@ -11,20 +11,18 @@
 class Game {
 private:
 	bool isRunning;
-	//SDL_Window* window = nullptr;
+	SDL_Window* window = nullptr;
 
-	////const int WALKING_ANIMATION_FRAMES = 10;
-	////SDL_Rect sheetRect[10];
-	//// used for rendering the current frame
-	//SDL_Texture* texture = nullptr;
-	//SDL_Renderer* renderer = nullptr;
-	//SDL_Rect* currentRect;
+	// used for rendering the current frame
+	SDL_Texture* texture = nullptr;
+	SDL_Renderer* renderer = nullptr;
+	SDL_Rect* currentRect;
 
-	//SDL_Surface *screen;
-	//Uint32 white;
-	//Uint32 starting_tick;
+	SDL_Surface *screen;
+	Uint32 white;
+	Uint32 starting_tick;
 
-	//int frame = 0;
+	int frame = 0;
 
 	//void FramerateHandler();
 
@@ -32,10 +30,10 @@ private:
 	//State s;
 
 public:
-	/*void Initialize();
-	void HandleEvents();
+	void Initialize();
+	//void HandleEvents();
 
-	void FrameHandler();*/
+	//void FrameHandler();
 
 	void Update() {};
 	void Render() {};
