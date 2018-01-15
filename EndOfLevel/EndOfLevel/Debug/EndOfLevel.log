@@ -1,3 +1,9 @@
 ﻿  Game.cpp
-  EndOfLevel.vcxproj -> D:\Component\Upload\EndOfLevel\EndOfLevel\Debug\EndOfLevel.exe
-  EndOfLevel.vcxproj -> D:\Component\Upload\EndOfLevel\EndOfLevel\Debug\EndOfLevel.pdb (Partial PDB)
+c:\users\gameuser\desktop\2018\component\upload\endoflevel\endoflevel\endoflevel\game.cpp(76): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\gameuser\desktop\2018\component\upload\endoflevel\endoflevel\endoflevel\game.cpp(81): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\gameuser\desktop\2018\component\upload\endoflevel\endoflevel\endoflevel\game.cpp(87): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload\endoflevel\endoflevel\endoflevel\game.cpp(88): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload\endoflevel\endoflevel\endoflevel\game.cpp(89): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload\endoflevel\endoflevel\endoflevel\game.cpp(90): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  EndOfLevel.vcxproj -> C:\Users\gameuser\Desktop\2018\Component\Upload\EndOfLevel\EndOfLevel\Debug\EndOfLevel.exe
+  EndOfLevel.vcxproj -> C:\Users\gameuser\Desktop\2018\Component\Upload\EndOfLevel\EndOfLevel\Debug\EndOfLevel.pdb (Partial PDB)

@@ -15,16 +15,22 @@ private:
 	bool isRunning;
 	SDL_Window* window = nullptr;
 
-	// used for rendering the current frame
 	SDL_Texture* texture = nullptr;
 	Texture myTexture;
 
-	
 
 	SDL_Renderer* renderer = nullptr;
 	SDL_Rect* currentRect;
 
 	SDL_Surface *screen;
+	SDL_Surface *stretchedSurface = nullptr; 
+
+
+	float surfaceX;
+	float surfaceY;
+	float surfaceW;
+	float surfaceH; 
+
 	Uint32 white;
 	Uint32 starting_tick;
 
@@ -35,6 +41,7 @@ private:
 
 public:
 	void Initialize();
+	void Load();
 	//void HandleEvents();
 
 	//void FrameHandler();
