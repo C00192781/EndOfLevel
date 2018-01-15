@@ -3,6 +3,7 @@
 #include <string>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <iostream>
 
 
 class Texture
@@ -16,6 +17,7 @@ public:
 
 	int getWidth();
 	int getHeight();
+	void setColour(Uint8 red, Uint8 green, Uint8 blue);
 
 private:
 	SDL_Texture* m_texture;
@@ -23,4 +25,6 @@ private:
 	// image dimensions
 	int m_width;
 	int m_height;
+
+	int r, g, b; 
 };

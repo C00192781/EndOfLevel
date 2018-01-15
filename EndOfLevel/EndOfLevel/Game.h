@@ -58,4 +58,7 @@ public:
 
 
 	SDL_Rect rect;
+	Uint8 r = 255;                
+	Uint8 g = 255;                 
+	Uint8 b = 255;                   
 };

@@ -3,8 +3,6 @@
 
 using namespace std;
 
-
-
 void Game::Initialize()
 {
 	isRunning = true; // used for while loop in main
@@ -43,17 +41,14 @@ void Game::Initialize()
 void Game::Load()
 {
 	myTexture.loadFromFile("texture.png", renderer);
-
-
 	/*Texture optimizedTexture;
 	optimizedTexture = SDL_Texture*/
-
 
 	SDL_Surface* optimizedSurface = NULL;
 //	SDL_Surface* loadedSurface = IMG_Load("texture.png");
 	SDL_Surface* loadedSurface = IMG_Load("stretch.bmp");
 
-	optimizedSurface = SDL_ConvertSurface(loadedSurface, screen->format, NULL);         ///////////////////////////////////
+	optimizedSurface = SDL_ConvertSurface(loadedSurface, screen->format, NULL);       
 	// No longer need loadedSurface so we git rid of it
 	SDL_FreeSurface(loadedSurface);
 
@@ -64,34 +59,96 @@ void Game::Load()
 void Game::Render()
 {
 	//SDL_UpdateTexture(myTexture.getTexture());
-	/*SDL_RenderCopy(renderer, myTexture.getTexture(), &rect, &rect);
-	SDL_RenderPresent(renderer);*/
 
-	if (surfaceW <= 240)
+	SDL_Event e;
+	while (SDL_PollEvent(&e) != 0)
 	{
-		surfaceW += 1;
-	}
-	if (surfaceH <= 350)
-	{
-		surfaceH += 0.8;
-	}
-	if (surfaceW <= 240 && surfaceH <= 350)
-	{
-		surfaceX -= 0.5;
-		surfaceY -= 0.4;
-	}
-	if (surfaceH <= 350)
-	{
-		//Apply the image stretched
-		SDL_Rect stretchedRect;
-		stretchedRect.x = surfaceX;
-		stretchedRect.y = surfaceY;
-		stretchedRect.w = surfaceW;
-		stretchedRect.h = surfaceH;
-		SDL_BlitScaled(stretchedSurface, NULL, screen, &stretchedRect);
+		if (e.type == SDL_KEYDOWN)
+		{
+			switch (e.key.keysym.sym)
+			{
+			case SDLK_r:
+				r += 8;
+				break;
 
-		//if ()
-		//cout << stretchedSurface->h << endl;
-		SDL_UpdateWindowSurface(window);
+			case SDLK_t:
+				r -= 8;
+				break;
+
+			case SDLK_g:
+				g += 8;
+				break;
+
+			case SDLK_h:
+				g -= 8;
+				break;
+
+			case SDLK_b:
+				g += 8;
+				break;
+
+			case SDLK_n:
+				b -= 8;
+				break;
+			}
+		}
 	}
+
+	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	SDL_RenderClear(renderer);
+
+	myTexture.setColour(r, g, b);
+
+	//// *****************     
+	SDL_RenderCopy(renderer, myTexture.getTexture(), &rect, &rect);
+	SDL_RenderPresent(renderer);
+
 }
+	
+
+
+
+	//SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);                       
+	//SDL_RenderClear(renderer);                                                       
+
+	//																					                     
+	//myTexture.setColour(200, 150, 150);    
+	//
+	//
+	//////myTexture.render(0, 0);       
+	//SDL_RenderCopy(renderer, myTexture.getTexture(), &rect, &rect);															
+	//SDL_RenderPresent(renderer);
+
+
+
+
+	//if (surfaceW <= 240)
+	//{
+	//	surfaceW += 1;
+	//}
+	//if (surfaceH <= 350)
+	//{
+	//	surfaceH += 0.8;
+	//}
+	//if (surfaceW <= 240 && surfaceH <= 350)
+	//{
+	//	surfaceX -= 0.5;
+	//	surfaceY -= 0.4;
+	//}
+	//if (surfaceH <= 350)
+	//{
+	//	//Apply the image stretched
+	//	SDL_Rect stretchedRect;
+	//	stretchedRect.x = surfaceX;
+	//	stretchedRect.y = surfaceY;
+	//	stretchedRect.w = surfaceW;
+	//	stretchedRect.h = surfaceH;
+	//	SDL_BlitScaled(stretchedSurface, NULL, screen, &stretchedRect);
+
+	//	//if ()
+	//	//cout << stretchedSurface->h << endl;
+	//	SDL_UpdateWindowSurface(window);
+	//}
+
+	
+
