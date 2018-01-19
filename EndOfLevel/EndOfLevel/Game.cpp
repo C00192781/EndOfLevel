@@ -34,6 +34,8 @@ void Game::Initialize()
 	surfaceX = 250;
 	surfaceY = 111;
 	
+
+	bloom.getConvolution(3);
 	
 }
 

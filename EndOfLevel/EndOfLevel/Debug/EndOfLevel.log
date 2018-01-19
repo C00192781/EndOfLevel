@@ -1,6 +1,16 @@
-﻿  Game.cpp
-  Generating Code...
-  Skipping... (no relevant changes detected)
+﻿  Texture.cpp
   Main.cpp
-  EndOfLevel.vcxproj -> C:\Users\gameuser\Desktop\2018\Component\Upload\EndOfLevel\EndOfLevel\Debug\EndOfLevel.exe
-  EndOfLevel.vcxproj -> C:\Users\gameuser\Desktop\2018\Component\Upload\EndOfLevel\EndOfLevel\Debug\EndOfLevel.pdb (Partial PDB)
+  LTimer.cpp
+  Game.cpp
+  Bloom.cpp
+d:\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(5): warning C4305: '=': truncation from 'double' to 'float'
+d:\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(32): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(34): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(36): warning C4244: 'argument': conversion from 'float' to 'const unsigned int', possible loss of data
+d:\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(39): warning C4018: '<': signed/unsigned mismatch
+d:\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(41): warning C4018: '<': signed/unsigned mismatch
+d:\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(50): warning C4018: '<': signed/unsigned mismatch
+d:\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(52): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  EndOfLevel.vcxproj -> D:\Component\Upload2\EndOfLevel\EndOfLevel\Debug\EndOfLevel.exe
+  EndOfLevel.vcxproj -> D:\Component\Upload2\EndOfLevel\EndOfLevel\Debug\EndOfLevel.pdb (Partial PDB)

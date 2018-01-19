@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "Texture.h"
+#include "Bloom.h"
 
 #define fps 60
 #define window_width 1000
@@ -60,5 +61,9 @@ public:
 	SDL_Rect rect;
 	Uint8 r = 255;                
 	Uint8 g = 255;                 
-	Uint8 b = 255;                   
+	Uint8 b = 255;     
+
+
+
+	Bloom bloom;
 };

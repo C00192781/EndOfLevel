@@ -18,6 +18,7 @@ public:
 	int getWidth();
 	int getHeight();
 	void setColour(Uint8 red, Uint8 green, Uint8 blue);
+	void setBlendMode(SDL_BlendMode blend);
 
 private:
 	SDL_Texture* m_texture;
