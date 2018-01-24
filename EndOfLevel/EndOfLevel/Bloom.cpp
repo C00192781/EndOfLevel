@@ -89,10 +89,10 @@ Uint32 * Bloom::Blur(Texture *texture, int kernelRadius, int totalPixels, SDL_Su
 
 				// pixel data exists as a one dimensional array
 				// so for a 10 x 10 portion of a screen - 100
-				// This cannot be handled as you would a two dimensional array though
+				// This cannot be handled as you would a two dimensional array 
 
 				// As this is a one dimensional array, 
-				// and I have x, y coordinates to handle
+				// and x, y coordinates needed to be handled
 				// I need to translate these coordinates to their actual position inside this array.
 
 				// Pixel = (y * pitch) + x;
@@ -133,6 +133,7 @@ Uint32 * Bloom::Blur(Texture *texture, int kernelRadius, int totalPixels, SDL_Su
 		for (int y = 0; y < h; y++)
 		{
 			Uint32 sum = 0;
+			int row = y * w;
 			for (int offsetY = 0; offsetY < kernelSize; offsetY++)
 			{
 				int indexY = clamp(0, clampH, (y - kernelRadius) + offsetY);
@@ -158,7 +159,7 @@ Uint32 * Bloom::Blur(Texture *texture, int kernelRadius, int totalPixels, SDL_Su
 				// sum up overall pixel colour for a row
 				sum = sum + RGBA;
 			}
-			pixelArray[y * w + x] = sum;
+			pixelArray[row + x] = sum;
 		}
 	}
 
@@ -166,4 +167,57 @@ Uint32 * Bloom::Blur(Texture *texture, int kernelRadius, int totalPixels, SDL_Su
 	//memcpy(mPixels, loadedSurface->pixels, loadedSurface->pitch * loadedSurface->h);
 	return pixelArray;
 	//SDL_UnlockSurface(surface);
+}
+
+Uint32 * Bloom::BrightPass(Texture * texture, SDL_Surface * surface)
+{
+	Uint8 r, g, b, a = 0;
+
+	int totalPixels = texture->getTotalPixels();
+	Uint32* tempPixelArray = NULL;
+	tempPixelArray = (Uint32*)texture->getPixels();
+
+	int w = texture->getWidth();
+	int h = texture->getHeight();
+
+	std::vector<float> luminance;
+
+
+	//if (int index = 0; index < )
+
+	for (int x = 0; x < w; x++)
+	{
+		for (int y = 0; y < h; y++)
+		{
+			Uint32 total;
+			r = tempPixelArray[y * w + x] >> 16;
+			g = tempPixelArray[y * w + x] >> 8;
+			b = tempPixelArray[y * w + x] >> 0;
+			a = tempPixelArray[y * w + x] >> 24;
+
+
+			if (r != 0)
+			{
+				
+			}
+			else if (g != 0)
+			{
+				
+			}
+			else if (b != 0)
+			{
+				
+			}
+			
+			//cout << luminance[0] << endl;
+			r = r * luminance[0];
+			g = g * luminance[1];
+			b = b * luminance[2];
+
+			total = (r << 16) | (g << 8) | (b << 0) | (a << 24);
+			tempPixelArray[y * w + x] = total;
+		}
+		
+	}
+	return tempPixelArray;
 }
