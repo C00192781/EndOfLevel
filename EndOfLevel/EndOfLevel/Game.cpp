@@ -10,8 +10,6 @@ void Game::Initialize()
 	SDL_Init(SDL_INIT_EVERYTHING);
 	// Create the window
 	window = SDL_CreateWindow("End of Level", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, SDL_WINDOW_SHOWN);
-	
-
 	// retrieve window surface for surface
 	screen = SDL_GetWindowSurface(window);
 
@@ -20,12 +18,11 @@ void Game::Initialize()
 	/// Renderer doesn't seem to be used for blitting
 	/// </summary>
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	//texture = IMG_LoadTexture(renderer, "Assets/spriteSheet.png");
 	
 	rect.x = 0;
 	rect.y = 0;
-	rect.h = 650;
-	rect.w = 433;
+	rect.h = 731;
+	rect.w = 500;
 
 
 
@@ -33,22 +30,17 @@ void Game::Initialize()
 	surfaceH = 1;
 	surfaceX = 250;
 	surfaceY = 111;
-	
 
-	bloom.getConvolution(3);
-	
+	kernelRadius = 1;
 }
 
 
 void Game::Load()
 {
-	myTexture.loadFromFile("texture.png", renderer);
-	/*Texture optimizedTexture;
-	optimizedTexture = SDL_Texture*/
+	myTexture.loadFromFile("ASSETS/texture.png", renderer);
 
 	SDL_Surface* optimizedSurface = NULL;
-//	SDL_Surface* loadedSurface = IMG_Load("texture.png");
-	SDL_Surface* loadedSurface = IMG_Load("stretch.bmp");
+	SDL_Surface* loadedSurface = IMG_Load("ASSETS/texture.png");
 
 	optimizedSurface = SDL_ConvertSurface(loadedSurface, screen->format, NULL);       
 	// No longer need loadedSurface so we git rid of it
@@ -60,8 +52,6 @@ void Game::Load()
 
 void Game::Render()
 {
-	//SDL_UpdateTexture(myTexture.getTexture());
-
 	SDL_Event e;
 	while (SDL_PollEvent(&e) != 0)
 	{
@@ -92,6 +82,24 @@ void Game::Render()
 			case SDLK_n:
 				b -= 8;
 				break;
+
+			case SDLK_o:
+				kernelRadius++;
+				cout << kernelRadius << endl;
+				break;
+
+			// Testing
+			case SDLK_l:
+
+				kernelSize = kernelRadius * 2 + 1;
+
+				Uint32 *pixelArray = nullptr;
+				int totalPixels = myTexture.getTotalPixels();
+				pixelArray = new Uint32[totalPixels];
+				pixelArray = bloom.Blur(&myTexture, kernelRadius, totalPixels, stretchedSurface);
+				SDL_UpdateTexture(myTexture.getTexture(), &myTexture.getRect(), pixelArray, myTexture.getPitch());
+
+				break;
 			}
 		}
 	}
@@ -104,7 +112,6 @@ void Game::Render()
 	//// *****************     
 	SDL_RenderCopy(renderer, myTexture.getTexture(), &rect, &rect);
 	SDL_RenderPresent(renderer);
-
 }
 	
 

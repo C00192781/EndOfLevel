@@ -2,15 +2,22 @@
   Main.cpp
   LTimer.cpp
   Game.cpp
+  EffectsHandler.cpp
   Bloom.cpp
-d:\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(5): warning C4305: '=': truncation from 'double' to 'float'
-d:\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(32): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(34): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-d:\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(36): warning C4244: 'argument': conversion from 'float' to 'const unsigned int', possible loss of data
-d:\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(39): warning C4018: '<': signed/unsigned mismatch
-d:\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(41): warning C4018: '<': signed/unsigned mismatch
-d:\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(50): warning C4018: '<': signed/unsigned mismatch
-d:\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(52): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(5): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(25): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(28): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(38): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(46): warning C4244: '/=': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(48): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(118): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(119): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(120): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(121): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(154): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(155): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(156): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(157): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
   Generating Code...
-  EndOfLevel.vcxproj -> D:\Component\Upload2\EndOfLevel\EndOfLevel\Debug\EndOfLevel.exe
-  EndOfLevel.vcxproj -> D:\Component\Upload2\EndOfLevel\EndOfLevel\Debug\EndOfLevel.pdb (Partial PDB)
+  EndOfLevel.vcxproj -> C:\Users\gameuser\Desktop\2018\Component\Upload2\EndOfLevel\EndOfLevel\Debug\EndOfLevel.exe
+  EndOfLevel.vcxproj -> C:\Users\gameuser\Desktop\2018\Component\Upload2\EndOfLevel\EndOfLevel\Debug\EndOfLevel.pdb (Partial PDB)

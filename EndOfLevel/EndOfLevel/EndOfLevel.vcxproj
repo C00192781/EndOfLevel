@@ -19,17 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bloom.h" />
+    <ClInclude Include="EffectsHandler.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="LTimer.h" />
+    <ClInclude Include="Texture.h" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="Bloom.cpp" />
+    <ClCompile Include="EffectsHandler.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="LTimer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Texture.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Bloom.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="LTimer.h" />
-    <ClInclude Include="Texture.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

@@ -2,9 +2,12 @@
 
 Texture::Texture()
 {
-	m_texture = NULL;
-	m_height = 0;
-	m_width = 0;
+	mTexture = NULL;
+	mHeight = 0;
+	mWidth = 0;
+	mTotalPixels = 0;
+	mPitch = 0;
+	mPixels = NULL;
 
 	r = 0xFF; 
 	g = 0xFF;
@@ -20,48 +23,90 @@ bool Texture::loadFromFile(std::string path, SDL_Renderer *renderer)
 	SDL_Texture* newTexture = NULL;
 
 	// Load image from the specified path passed in parameters
-	SDL_Surface* surface = IMG_Load(path.c_str());
-	if (surface != NULL)
+	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
+
+
+	if (loadedSurface != NULL)
 	{
-		std::cout << surface->format << std::endl;
-
-
-		// SDL_MapRGB function is used to map an RGB triple to an opaque pixel value for a given pixel format
-		SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, r, g, b));
-		// Create texture from surface pixels
-		newTexture = SDL_CreateTextureFromSurface(renderer, surface);
+		// SDL_TEXTUREACCESS_STREAMING
+		// changes frequently, lockable
+		newTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, loadedSurface->w, loadedSurface->h);
+	
+		//Lock texture for manipulation
+		SDL_LockTexture(newTexture, NULL, &mPixels, &mPitch);
+		
+		// Copy loaded/formatted surface pixels
+		memcpy(mPixels, loadedSurface->pixels, loadedSurface->pitch * loadedSurface->h);
+		
+		// Unlock texture to update
+		SDL_UnlockTexture(newTexture);
 		if (newTexture != NULL)
 		{
 			// Get image dimensions
-			m_width = surface->w;
-			m_height = surface->h;
+			mWidth = loadedSurface->w;
+			mHeight = loadedSurface->h;
+
+			// set other important values
+			mPitch = loadedSurface->pitch;
+			mClip = loadedSurface->clip_rect;
+			mFormat = *loadedSurface->format;
+
+			// REMOVED - mPixels = loadedSurface->pixels; 
+			// Would set before instantiated and cause potential crashes
 		}
 
-		SDL_FreeSurface(surface);
+		SDL_FreeSurface(loadedSurface);
 	}
 
-	m_texture = newTexture;
-	return m_texture;
+	mTexture = newTexture;
+
+	return mTexture;
 }
 
 SDL_Texture* Texture::getTexture()
 {
-	return m_texture;
+	return mTexture;
 }
 
 int Texture::getWidth()
 {
-	return m_width;
+	return mWidth;
 }
 
 int Texture::getHeight()
 {
-	return m_height;
+	return mHeight;
+}
+
+void* Texture::getPixels()
+{
+	return mPixels;
+}
+
+int Texture::getTotalPixels()
+{
+	mTotalPixels = getHeight() * getWidth();
+	return mTotalPixels;
+}
+
+int Texture::getPitch()
+{
+	return mPitch;
+}
+
+SDL_Rect Texture::getRect()
+{
+	return mClip;
+}
+
+SDL_PixelFormat Texture::getFormat()
+{
+	return mFormat;
 }
 
 void Texture::setColour(Uint8 red, Uint8 green, Uint8 blue)
 {
-	SDL_SetTextureColorMod(m_texture, red, green, blue);
+	SDL_SetTextureColorMod(mTexture, red, green, blue);
 }
 
 void Texture::setBlendMode(SDL_BlendMode blend)
