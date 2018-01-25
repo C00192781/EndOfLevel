@@ -171,53 +171,101 @@ Uint32 * Bloom::Blur(Texture *texture, int kernelRadius, int totalPixels, SDL_Su
 
 Uint32 * Bloom::BrightPass(Texture * texture, SDL_Surface * surface)
 {
+	
 	Uint8 r, g, b, a = 0;
-
-	int totalPixels = texture->getTotalPixels();
-	Uint32* tempPixelArray = NULL;
-	tempPixelArray = (Uint32*)texture->getPixels();
-
 	int w = texture->getWidth();
 	int h = texture->getHeight();
 
-	std::vector<float> luminance;
+	float luminance[] = { 0.2126f, 0.7152f, 0.0722f };
 
 
-	//if (int index = 0; index < )
+	int totalPixels = texture->getTotalPixels();
+	Uint32* tempPixelArray = nullptr;
+	tempPixelArray = (Uint32 *)texture->getPixels();
 
+	
 	for (int x = 0; x < w; x++)
 	{
 		for (int y = 0; y < h; y++)
 		{
-			Uint32 total;
 			r = tempPixelArray[y * w + x] >> 16;
 			g = tempPixelArray[y * w + x] >> 8;
 			b = tempPixelArray[y * w + x] >> 0;
 			a = tempPixelArray[y * w + x] >> 24;
 
-
-			if (r != 0)
-			{
-				
-			}
-			else if (g != 0)
-			{
-				
-			}
-			else if (b != 0)
-			{
-				
-			}
-			
-			//cout << luminance[0] << endl;
-			r = r * luminance[0];
-			g = g * luminance[1];
-			b = b * luminance[2];
-
-			total = (r << 16) | (g << 8) | (b << 0) | (a << 24);
-			tempPixelArray[y * w + x] = total;
-		}
+			float rTest = r;
+			float gTest = g;
+			float bTest = b;
 		
-	}
+			float rTestMul = r * luminance[0];
+			float gTestMul = g * luminance[1];
+			float bTestMul = b * luminance[2];
+
+			float BRIGHT_PASS_THRESHOLD = 50;
+			// 50 is placeholder - user will input, e.g. 10, 20, 30
+			if ((rTestMul + gTestMul + bTestMul) > BRIGHT_PASS_THRESHOLD)
+			{
+				float ratio = 1.0 / max(max(rTest, gTest), bTest);
+
+				r += r *ratio;
+				g += g *ratio;
+				b += b *ratio;
+			}
+			else
+			{
+				r = 0;
+				g = 0;
+				b = 0;
+			}
+
+			Uint32 RGBA;
+			RGBA = (r << 16) | (g << 8) | (b << 0) | (a << 24);
+			tempPixelArray[y * w + x] = RGBA;
+		}	
+	}		
+
 	return tempPixelArray;
 }
+
+Uint32 * Bloom::BloomEffect(Texture * texture, SDL_Surface * surface, int totalPixels)
+{
+	Uint8 r, g, b, a = 0;
+	int w = texture->getWidth();
+	int h = texture->getHeight();
+
+	// NEEDS MPIXELS
+	Uint32* tempPixelArray = NULL;
+	tempPixelArray = (Uint32*)texture->getPixels();
+
+	Uint32* pixelArray = nullptr;
+	pixelArray = new Uint32[totalPixels];
+
+	for (int x = 0; x < w; x++)
+	{
+		for (int y = 0; y < h; y++)
+		{
+			r = tempPixelArray[y * w + x] >> 16;
+			g = tempPixelArray[y * w + x] >> 8;
+			b = tempPixelArray[y * w + x] >> 0;
+			a = tempPixelArray[y * w + x] >> 24;
+
+			const float BLEND = 0.3;
+		
+			r += r * BLEND;
+			g += g * BLEND;
+			b += b * BLEND;
+			a += a * BLEND;
+
+
+			Uint32 RGBA;
+			RGBA = (r << 16) | (g << 8) | (b << 0) | (a << 24);
+			pixelArray[y * w + x] = RGBA;
+		}
+
+	}
+
+	return pixelArray;
+}
+
+
+

@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #include "Texture.h"
 
 using namespace std;
@@ -27,6 +28,7 @@ public:
 	void gaussianKernel(float ** kernel, int kernelRadius);
 	Uint32 * Blur(Texture* texture, int kernelRadius, int totalPixels, SDL_Surface* surface);
 	Uint32 * BrightPass(Texture* texture, SDL_Surface* surface);
+	Uint32 * BloomEffect(Texture* texture, SDL_Surface* surface, int totalPixels);
 
 private:
 

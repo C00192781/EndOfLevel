@@ -96,8 +96,9 @@ void Game::Render()
 				Uint32 *pixelArray = nullptr;
 				int totalPixels = myTexture.getTotalPixels();
 				pixelArray = new Uint32[totalPixels];
-				//pixelArray = bloom.BrightPass(&myTexture, stretchedSurface);
+				pixelArray = bloom.BrightPass(&myTexture, stretchedSurface);
 				pixelArray = bloom.Blur(&myTexture, kernelRadius, totalPixels, stretchedSurface);
+				pixelArray = bloom.BloomEffect(&myTexture, stretchedSurface, totalPixels);
 				SDL_UpdateTexture(myTexture.getTexture(), &myTexture.getRect(), pixelArray, myTexture.getPitch());
 
 				break;

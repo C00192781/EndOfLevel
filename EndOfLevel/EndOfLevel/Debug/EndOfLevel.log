@@ -1,5 +1,4 @@
-﻿  Game.cpp
-  Bloom.cpp
+﻿  Bloom.cpp
 c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(5): warning C4305: '=': truncation from 'double' to 'float'
 c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(25): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(28): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
@@ -14,9 +13,14 @@ c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endofleve
 c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(152): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
 c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(153): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
 c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(154): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
-c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(213): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
-c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(214): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
-c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(215): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
-  Generating Code...
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(208): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(210): warning C4244: '+=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(211): warning C4244: '+=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(212): warning C4244: '+=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(252): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(254): warning C4244: '+=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(255): warning C4244: '+=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(256): warning C4244: '+=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\bloom.cpp(257): warning C4244: '+=': conversion from 'float' to 'Uint8', possible loss of data
   EndOfLevel.vcxproj -> C:\Users\gameuser\Desktop\2018\Component\Upload2\EndOfLevel\EndOfLevel\Debug\EndOfLevel.exe
   EndOfLevel.vcxproj -> C:\Users\gameuser\Desktop\2018\Component\Upload2\EndOfLevel\EndOfLevel\Debug\EndOfLevel.pdb (Partial PDB)
