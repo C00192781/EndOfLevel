@@ -5,6 +5,7 @@
 
 #include "Texture.h"
 #include "Bloom.h"
+#include "Growing.h"
 
 #define fps 60
 #define window_width 1000
@@ -47,7 +48,7 @@ public:
 
 	//void FrameHandler();
 
-	void Update() {};
+	void Update();
 	void Render();
 	void CleanUp() {};
 
@@ -66,4 +67,7 @@ public:
 	int kernelSize;
 
 	Bloom bloom;
+	Growing grow;
+
+	SDL_Rect stretchedRect;
 };

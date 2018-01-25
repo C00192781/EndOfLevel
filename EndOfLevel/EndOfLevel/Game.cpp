@@ -26,10 +26,10 @@ void Game::Initialize()
 
 
 
-	surfaceW = 50;
-	surfaceH = 1;
-	surfaceX = 250;
-	surfaceY = 111;
+	surfaceW = 0;
+	surfaceH = 0;
+	surfaceX = 0;
+	surfaceY = 0;
 
 	kernelRadius = 1;
 }
@@ -50,7 +50,7 @@ void Game::Load()
 }
 
 
-void Game::Render()
+void Game::Update()
 {
 	SDL_Event e;
 	while (SDL_PollEvent(&e) != 0)
@@ -88,7 +88,7 @@ void Game::Render()
 				cout << kernelRadius << endl;
 				break;
 
-			// Testing
+				// Testing
 			case SDLK_l:
 
 				kernelSize = kernelRadius * 2 + 1;
@@ -96,9 +96,9 @@ void Game::Render()
 				Uint32 *pixelArray = nullptr;
 				int totalPixels = myTexture.getTotalPixels();
 				pixelArray = new Uint32[totalPixels];
-				pixelArray = bloom.BrightPass(&myTexture, stretchedSurface);
+				//pixelArray = bloom.BrightPass(&myTexture, stretchedSurface);
 				pixelArray = bloom.Blur(&myTexture, kernelRadius, totalPixels, stretchedSurface);
-				pixelArray = bloom.BloomEffect(&myTexture, stretchedSurface, totalPixels);
+				//pixelArray = bloom.BloomEffect(&myTexture, stretchedSurface, totalPixels);
 				SDL_UpdateTexture(myTexture.getTexture(), &myTexture.getRect(), pixelArray, myTexture.getPitch());
 
 				break;
@@ -106,13 +106,56 @@ void Game::Render()
 		}
 	}
 
+}
+
+void Game::Render()
+{
+	
+
+
+	//if (surfaceW <= 240)
+	//{
+	//	surfaceW += 1;
+	//}
+	//if (surfaceH <= 731)
+	//{
+	//	surfaceH += 0.1;
+	//}
+	//if (surfaceW <= 240 && surfaceH <= 350)
+	//{
+	//	surfaceX -= 0.5;
+	//	surfaceY -= 0.4;
+	//}
+	//if (surfaceH <= 350)
+	/*{*/
+		//Apply the image stretched
+		
+		//stretchedRect.x = surfaceX;
+		//stretchedRect.y = surfaceY;
+		//stretchedRect.w = surfaceW;
+		//stretchedRect.h = surfaceH;
+		//SDL_BlitScaled(stretchedSurface, &myTexture.getRect(), screen, &stretchedRect);
+
+	
+
+	grow.Animation(&myTexture, screen, stretchedSurface, &stretchedRect, 0, 0, 500, 0, myTexture.getWidth(), myTexture.getHeight(), 100, 100, 100);
+	/*)*/
+	//	////if ()
+	//	////cout << stretchedSurface->h << endl;
+		//SDL_UpdateWindowSurface(window);
+	//}
+
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	SDL_RenderClear(renderer);
 
 	myTexture.setColour(r, g, b);
 
-	//// *****************     
-	SDL_RenderCopy(renderer, myTexture.getTexture(), &rect, &rect);
+	const SDL_Point center =  { stretchedRect.w / 2 + stretchedRect.x, stretchedRect.h / 2 + stretchedRect.y };
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
+
+	//// *****************  
+	//SDL_RenderCopy(renderer, myTexture.getTexture(), &rect, &stretchedRect);
+	SDL_RenderCopyEx(renderer, myTexture.getTexture(), &rect, &stretchedRect, 0, NULL, flip);
 	SDL_RenderPresent(renderer);
 }
 	
@@ -133,33 +176,7 @@ void Game::Render()
 
 
 
-	//if (surfaceW <= 240)
-	//{
-	//	surfaceW += 1;
-	//}
-	//if (surfaceH <= 350)
-	//{
-	//	surfaceH += 0.8;
-	//}
-	//if (surfaceW <= 240 && surfaceH <= 350)
-	//{
-	//	surfaceX -= 0.5;
-	//	surfaceY -= 0.4;
-	//}
-	//if (surfaceH <= 350)
-	//{
-	//	//Apply the image stretched
-	//	SDL_Rect stretchedRect;
-	//	stretchedRect.x = surfaceX;
-	//	stretchedRect.y = surfaceY;
-	//	stretchedRect.w = surfaceW;
-	//	stretchedRect.h = surfaceH;
-	//	SDL_BlitScaled(stretchedSurface, NULL, screen, &stretchedRect);
 
-	//	//if ()
-	//	//cout << stretchedSurface->h << endl;
-	//	SDL_UpdateWindowSurface(window);
-	//}
 
 	
 
