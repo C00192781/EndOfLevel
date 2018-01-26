@@ -21,15 +21,8 @@ void Game::Initialize()
 	
 	rect.x = 0;
 	rect.y = 0;
-	rect.h = 731;
-	rect.w = 500;
-
-
-
-	surfaceW = 0;
-	surfaceH = 0;
-	surfaceX = 0;
-	surfaceY = 0;
+	rect.h = 563;
+	rect.w = 1000;
 
 	kernelRadius = 1;
 }
@@ -96,7 +89,7 @@ void Game::Update()
 				Uint32 *pixelArray = nullptr;
 				int totalPixels = myTexture.getTotalPixels();
 				pixelArray = new Uint32[totalPixels];
-				//pixelArray = bloom.BrightPass(&myTexture, stretchedSurface);
+				pixelArray = bloom.BrightPass(&myTexture, stretchedSurface);
 				pixelArray = bloom.Blur(&myTexture, kernelRadius, totalPixels, stretchedSurface);
 				//pixelArray = bloom.BloomEffect(&myTexture, stretchedSurface, totalPixels);
 				SDL_UpdateTexture(myTexture.getTexture(), &myTexture.getRect(), pixelArray, myTexture.getPitch());
@@ -110,73 +103,20 @@ void Game::Update()
 
 void Game::Render()
 {
-	
+	static float xPos = 0.0f;
+	static float yPos = 0.0f;
+	static float startWidth = myTexture.getWidth();
+	static float startHeight = 0;
+	static float endWidth = myTexture.getWidth();
+	static float endHeight = myTexture.getHeight();	
 
-
-	//if (surfaceW <= 240)
-	//{
-	//	surfaceW += 1;
-	//}
-	//if (surfaceH <= 731)
-	//{
-	//	surfaceH += 0.1;
-	//}
-	//if (surfaceW <= 240 && surfaceH <= 350)
-	//{
-	//	surfaceX -= 0.5;
-	//	surfaceY -= 0.4;
-	//}
-	//if (surfaceH <= 350)
-	/*{*/
-		//Apply the image stretched
-		
-		//stretchedRect.x = surfaceX;
-		//stretchedRect.y = surfaceY;
-		//stretchedRect.w = surfaceW;
-		//stretchedRect.h = surfaceH;
-		//SDL_BlitScaled(stretchedSurface, &myTexture.getRect(), screen, &stretchedRect);
-
-	
-
-	grow.Animation(&myTexture, screen, stretchedSurface, &stretchedRect, 0, 0, 500, 0, myTexture.getWidth(), myTexture.getHeight(), 100, 100, 100);
-	/*)*/
-	//	////if ()
-	//	////cout << stretchedSurface->h << endl;
-		//SDL_UpdateWindowSurface(window);
-	//}
+	grow.Animation(&myTexture, screen, stretchedSurface, &stretchedRect, &xPos, &yPos, &startWidth, &startHeight, &endWidth, &endHeight, 1, 1);
 
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	SDL_RenderClear(renderer);
 
 	myTexture.setColour(r, g, b);
-
-	const SDL_Point center =  { stretchedRect.w / 2 + stretchedRect.x, stretchedRect.h / 2 + stretchedRect.y };
-	SDL_RendererFlip flip = SDL_FLIP_NONE;
-
-	//// *****************  
 	//SDL_RenderCopy(renderer, myTexture.getTexture(), &rect, &stretchedRect);
-	SDL_RenderCopyEx(renderer, myTexture.getTexture(), &rect, &stretchedRect, 0, NULL, flip);
+	SDL_RenderCopyEx(renderer, myTexture.getTexture(), &rect, &stretchedRect, 0, NULL, SDL_FLIP_NONE);
 	SDL_RenderPresent(renderer);
 }
-	
-
-
-
-	//SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);                       
-	//SDL_RenderClear(renderer);                                                       
-
-	//																					                     
-	//myTexture.setColour(200, 150, 150);    
-	//
-	//
-	//////myTexture.render(0, 0);       
-	//SDL_RenderCopy(renderer, myTexture.getTexture(), &rect, &rect);															
-	//SDL_RenderPresent(renderer);
-
-
-
-
-
-
-	
-

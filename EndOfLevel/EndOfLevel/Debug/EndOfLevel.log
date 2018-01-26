@@ -1,7 +1,6 @@
-﻿  Growing.cpp
-c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\growing.cpp(36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\growing.cpp(37): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\growing.cpp(38): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\gameuser\desktop\2018\component\upload2\endoflevel\endoflevel\endoflevel\growing.cpp(39): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  EndOfLevel.vcxproj -> C:\Users\gameuser\Desktop\2018\Component\Upload2\EndOfLevel\EndOfLevel\Debug\EndOfLevel.exe
-  EndOfLevel.vcxproj -> C:\Users\gameuser\Desktop\2018\Component\Upload2\EndOfLevel\EndOfLevel\Debug\EndOfLevel.pdb (Partial PDB)
+﻿  Game.cpp
+d:\component\upload5\endoflevel\endoflevel\endoflevel\game.cpp(108): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\component\upload5\endoflevel\endoflevel\endoflevel\game.cpp(110): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\component\upload5\endoflevel\endoflevel\endoflevel\game.cpp(111): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  EndOfLevel.vcxproj -> D:\Component\Upload5\EndOfLevel\EndOfLevel\Debug\EndOfLevel.exe
+  EndOfLevel.vcxproj -> D:\Component\Upload5\EndOfLevel\EndOfLevel\Debug\EndOfLevel.pdb (Partial PDB)

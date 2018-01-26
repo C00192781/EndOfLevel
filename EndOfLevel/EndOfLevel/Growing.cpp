@@ -2,10 +2,8 @@
 
 Growing::Growing()
 {
-	surfaceW = 0;
-	surfaceH = 0;
-	surfaceX = 0;
-	surfaceY = 0;
+	lastTickTime, delta = 0.0f;
+	complete = false;
 }
 
 Growing::~Growing()
@@ -13,34 +11,48 @@ Growing::~Growing()
 
 }
 
-void Growing::Animation(Texture* texture, SDL_Surface* screenSurface, SDL_Surface* stretch, SDL_Rect* rect, float x, float y, float startWidth, float startHeight, float endWidth, float endHeight, int timerStart, int timerIntermediate, int timerEnd)
+void Growing::Animation(Texture* texture, SDL_Surface* screenSurface, SDL_Surface* stretch, SDL_Rect* rect, float *x, float *y, float *startWidth, float *startHeight, float *endWidth, float *endHeight, float timeToStart, float timeToEnd)
 {
-	surfaceW = startWidth;
-	surfaceH = startHeight;
-	surfaceX = x;
-	surfaceY = y;
-
-	//std::cout << "startwidth" << x << std::endl;
-
-	if (surfaceW < startWidth)
+	if (complete == false)
 	{
-		surfaceW += 1;
+		uint32_t tickTime = SDL_GetTicks();
+		delta = tickTime - lastTickTime;
+		lastTickTime = tickTime;
+		uint32_t lastTickTimeInSeconds = lastTickTime * 0.001f;
+
+		static float mul = lastTickTime;
+		if (lastTickTimeInSeconds >= timeToStart)
+		{
+			static float height = *endHeight - *startHeight;
+			static float width = *endWidth - *startWidth;
+			static float incrementH = (height / (timeToEnd*mul));
+			static float incrementW = (width / (timeToEnd*mul));
+
+			if (*startHeight < *endHeight)
+			{
+				*startHeight += incrementH;
+			}
+			if (*startWidth < *endWidth)
+			{
+				*startWidth += incrementW;
+			}
+		}
+
+		rect->x = *x;
+		rect->y = *y;
+		rect->w = *startWidth;
+		rect->h = *startHeight;
+		SDL_BlitScaled(stretch, &texture->getRect(), screenSurface, rect);
+
+		if (lastTickTimeInSeconds >= (timeToStart + timeToEnd))
+		{
+			complete = true;
+			std::cout << "Animation complete" << std::endl;
+		}
 	}
-	if (surfaceH < endHeight)
-	{
-		surfaceH += 1;
-	}
+}
 
-	std::cout << "startwidth" << surfaceH << std::endl;
-
-	rect->x = surfaceX;
-	rect->y = surfaceY;
-	rect->w = surfaceW;
-	rect->h = surfaceH;
-	//SDL_BlitScaled(stretchedSurface, &myTexture.getRect(), screen, &stretchedRect);
-	SDL_BlitScaled(stretch, &texture->getRect(), screenSurface, rect);
-
-
-
-
+bool Growing::completed()
+{
+	return false;
 }
