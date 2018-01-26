@@ -1,4 +1,4 @@
-#include "Bloom.h"
+﻿#include "Bloom.h"
 
 Bloom::Bloom()
 {
@@ -14,7 +14,7 @@ void Bloom::gaussianKernel(float ** kernel, int kernelRadius)
 {
 	double sum = 0.0f;
 	// STANDARD DEVIATION
-	// ignoring a Gaussian function beyond a radius of 3�sigma 
+	// ignoring a Gaussian function beyond a radius of 3·sigma 
 	// still leaves you with more than 97% of its total information
 	double sigma = kernelRadius / 3.0f;
 	double sigmaSquared = pow(sigma, 2.0f);
@@ -169,22 +169,25 @@ Uint32 * Bloom::Blur(Texture *texture, int kernelRadius, int totalPixels, SDL_Su
 	//SDL_UnlockSurface(surface);
 }
 
-Uint32 * Bloom::BrightPass(Texture * texture, SDL_Surface * surface)
+Uint32 * Bloom::BrightPass(Texture * texture, SDL_Surface * surface, int brightPassThreshold)
 {
 	
 	Uint8 r, g, b, a = 0;
 	int w = texture->getWidth();
 	int h = texture->getHeight();
 
-	// 
+	// Y′ = 0.2126 R′ + 0.7152 G′ + 0.0722 B′
 	float luminance[] = { 0.2126f, 0.7152f, 0.0722f };
 
-
 	int totalPixels = texture->getTotalPixels();
-	Uint32* tempPixelArray = nullptr;
-	tempPixelArray = (Uint32 *)texture->getPixels();
 
-	
+	// NEEDS MPIXELS
+	Uint32* tempPixelArray = NULL;
+	tempPixelArray = (Uint32*)texture->getPixels();
+
+	Uint32* pixelArray = nullptr;
+	pixelArray = new Uint32[totalPixels];
+
 	for (int x = 0; x < w; x++)
 	{
 		for (int y = 0; y < h; y++)
@@ -194,23 +197,16 @@ Uint32 * Bloom::BrightPass(Texture * texture, SDL_Surface * surface)
 			b = tempPixelArray[y * w + x] >> 0;
 			a = tempPixelArray[y * w + x] >> 24;
 
-			float rTest = r;
-			float gTest = g;
-			float bTest = b;
+			Uint8 rTest = r * luminance[0];
+			Uint8 gTest = g * luminance[1];
+			Uint8 bTest = b * luminance[2];
 		
-			float rTestMul = r * luminance[0];
-			float gTestMul = g * luminance[1];
-			float bTestMul = b * luminance[2];
+			Uint8 test;
+			test = (rTest << 16) | (gTest << 8) | (bTest << 0) | (a << 24);
 
-			float BRIGHT_PASS_THRESHOLD = 50;
-			// 50 is placeholder - user will input, e.g. 10, 20, 30
-			if ((rTestMul + gTestMul + bTestMul) > BRIGHT_PASS_THRESHOLD)
+			if (test > brightPassThreshold)
 			{
-				float ratio = 1.0 / max(max(rTest, gTest), bTest);
-
-				r += r *ratio;
-				g += g *ratio;
-				b += b *ratio;
+				// do nothing
 			}
 			else
 			{
@@ -221,14 +217,14 @@ Uint32 * Bloom::BrightPass(Texture * texture, SDL_Surface * surface)
 
 			Uint32 RGBA;
 			RGBA = (r << 16) | (g << 8) | (b << 0) | (a << 24);
-			tempPixelArray[y * w + x] = RGBA;
+			pixelArray[y * w + x] = RGBA;
 		}	
 	}		
 
-	return tempPixelArray;
+	return pixelArray;
 }
 
-Uint32 * Bloom::BloomEffect(Texture * texture, SDL_Surface * surface, int totalPixels)
+Uint32 * Bloom::ApplyBloom(Texture * texture, SDL_Surface * surface, int totalPixels)
 {
 	Uint8 r, g, b, a = 0;
 	int w = texture->getWidth();
