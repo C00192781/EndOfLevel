@@ -13,11 +13,6 @@ Bloom::~Bloom()
 void Bloom::gaussianKernel(float ** kernel, int kernelRadius)
 {
 	double sum = 0.0f;
-	// STANDARD DEVIATION
-	// ignoring a Gaussian function beyond a radius of 3·sigma 
-	// still leaves you with more than 97% of its total information
-	double sigma = kernelRadius / 3.0f;
-	double sigmaSquared = pow(sigma, 2.0f);
 	double radiusSquared = pow(kernelRadius, 2.0f);
 	double sqrt1 = 1.0f / (2.0f * radiusSquared);
 	double sqrt2 = 1.0f / (sqrt(2.0f * PI) * kernelRadius);
@@ -28,11 +23,10 @@ void Bloom::gaussianKernel(float ** kernel, int kernelRadius)
 	tempKernel = new float[kernelSize];
 
 	// accumulate values
-	double radiusMod = 1.0f;
 	int r = -kernelRadius;
 	for (int index = 0; index < kernelSize; index++)
 	{
-		double x = r * radiusMod;
+		double x = r;
 		x *= x;
 		tempKernel[index] =
 			sqrt2 * exp(-x * sqrt1);
@@ -261,6 +255,17 @@ Uint32 * Bloom::ApplyBloom(Texture * texture, SDL_Surface * surface, int totalPi
 			mulG = g *bloomMultiplier;
 			mulB = b *bloomMultiplier;
 			mulA = a *bloomMultiplier;
+
+
+			/*mulR += r * bloomMultiplier;
+			mulG += g * bloomMultiplier;
+			mulB += b * bloomMultiplier;
+			mulA += a * bloomMultiplier;
+
+			mulR = min(mulR, 255.0f);
+			mulG = min(mulG, 255.0f);
+			mulB = min(mulB, 255.0f);
+			mulA = min(mulA, 255.0f);*/
 
 			Uint32 RGBA;
 			RGBA = ((Uint32)mulR << 16) | ((Uint32)mulG << 8) | ((Uint32)mulB << 0) | ((Uint32)mulA << 24);
