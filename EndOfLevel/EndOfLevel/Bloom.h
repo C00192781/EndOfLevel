@@ -16,6 +16,7 @@ t clamp(t x, t min, t max)
 	return x;
 }
 
+
 class Bloom
 {
 public:
