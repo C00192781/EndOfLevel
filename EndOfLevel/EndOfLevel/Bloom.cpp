@@ -67,7 +67,7 @@ Uint32 * Bloom::Blur(Texture *texture, int kernelRadius, int totalPixels, SDL_Su
 	float * kernel = nullptr;
 	gaussianKernel(&kernel, kernelRadius);
 	
-	// x pass
+	// Y PASS
 	for (int x = 0; x < w; x++)
 	{
 		for (int y = 0; y < h; y++)
@@ -121,7 +121,7 @@ Uint32 * Bloom::Blur(Texture *texture, int kernelRadius, int totalPixels, SDL_Su
 		}
 	}
 
-	// y pass
+	// X PASS
 	for (int x = 0; x < w; x++)
 	{
 		for (int y = 0; y < h; y++)
