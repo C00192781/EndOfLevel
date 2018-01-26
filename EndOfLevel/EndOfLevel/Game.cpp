@@ -112,13 +112,13 @@ void Game::Render()
 	static float endWidth = 300;
 	static float endHeight = 300;	
 
-	grow.Animation(&myTexture, screen, stretchedSurface, &stretchedRect, &xPos, &yPos, &startWidth, &startHeight, &endWidth, &endHeight, 2, 3);
+	grow.Animation(&myTexture, screen, stretchedSurface, &stretchedRect, &xPos, &yPos, &startWidth, &startHeight, &endWidth, &endHeight, 3, 3);
 
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	SDL_RenderClear(renderer);
 
 	myTexture.setColour(r, g, b);
-	SDL_Point center = { 0, 0 };
+	/*SDL_Point center = { 0, 0 };*/
 	//SDL_RenderCopy(renderer, myTexture.getTexture(), NULL, &myTexture.getRect());
 	SDL_RenderCopyEx(renderer, myTexture.getTexture(), &rect, &stretchedRect, 0, NULL, SDL_FLIP_NONE);
 	SDL_RenderPresent(renderer);
