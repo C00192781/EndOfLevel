@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bloom.h" />
-    <ClInclude Include="EffectsHandler.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Growing.h" />
     <ClInclude Include="LTimer.h" />
@@ -28,7 +27,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bloom.cpp" />
-    <ClCompile Include="EffectsHandler.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Growing.cpp" />
     <ClCompile Include="LTimer.cpp" />

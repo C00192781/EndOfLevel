@@ -24,8 +24,6 @@ int main()
 	{
 		game->Update();
 		game->Render();
-		//game->HandleEvents();
-		//game->FrameHandler();
 	}
 
 	game->CleanUp();

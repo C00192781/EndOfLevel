@@ -91,8 +91,6 @@ void Game::Update()
 				// Testing
 			case SDLK_l:
 
-				//kernelSize = kernelRadius * 2 + 1;
-
 				Uint32 *pixelArray = nullptr;
 				int totalPixels = myTexture.getTotalPixels();
 				pixelArray = new Uint32[totalPixels];
@@ -110,8 +108,8 @@ void Game::Update()
 
 void Game::Render()
 {
-	static float xPos = 300;
-	static float yPos = 300;
+	static float xPos = 310;
+	static float yPos = 310;
 	static float startWidth = 50;
 	static float startHeight = 50;
 	static float endWidth = 300;

@@ -256,17 +256,6 @@ Uint32 * Bloom::ApplyBloom(Texture * texture, SDL_Surface * surface, int totalPi
 			mulB = b *bloomMultiplier;
 			mulA = a *bloomMultiplier;
 
-
-			/*mulR += r * bloomMultiplier;
-			mulG += g * bloomMultiplier;
-			mulB += b * bloomMultiplier;
-			mulA += a * bloomMultiplier;
-
-			mulR = min(mulR, 255.0f);
-			mulG = min(mulG, 255.0f);
-			mulB = min(mulB, 255.0f);
-			mulA = min(mulA, 255.0f);*/
-
 			Uint32 RGBA;
 			RGBA = ((Uint32)mulR << 16) | ((Uint32)mulG << 8) | ((Uint32)mulB << 0) | ((Uint32)mulA << 24);
 			pixelArray[y * w + x] = RGBA;
