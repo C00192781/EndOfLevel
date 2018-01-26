@@ -121,8 +121,7 @@ void Game::Render()
 	SDL_RenderClear(renderer);
 
 	myTexture.setColour(r, g, b);
-	/*SDL_Point center = { 0, 0 };*/
-	SDL_RenderCopy(renderer, myTexture.getTexture(), NULL, &myTexture.getRect());
-	//SDL_RenderCopyEx(renderer, myTexture.getTexture(), &rect, &stretchedRect, 0, NULL, SDL_FLIP_NONE);
+	//SDL_RenderCopy(renderer, myTexture.getTexture(), NULL, &myTexture.getRect());
+	SDL_RenderCopyEx(renderer, myTexture.getTexture(), &rect, &stretchedRect, 0, NULL, SDL_FLIP_NONE);
 	SDL_RenderPresent(renderer);
 }
