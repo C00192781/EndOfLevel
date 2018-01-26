@@ -51,13 +51,13 @@ void Bloom::gaussianKernel(float ** kernel, int kernelRadius)
 
 Uint32 * Bloom::Blur(Texture *texture, int kernelRadius, int totalPixels, SDL_Surface* surface)
 {
-	//SDL_LockSurface(surface);
+	
 	Uint8 r, g, b, a = 0;
 		
 	// NEEDS MPIXELS
 	Uint32* tempPixelArray = NULL;
 	tempPixelArray = (Uint32*)texture->getPixels();
-
+	// pass in results
 	Uint32* pixelArray = nullptr;
 	pixelArray = new Uint32[totalPixels];
 
@@ -164,15 +164,16 @@ Uint32 * Bloom::Blur(Texture *texture, int kernelRadius, int totalPixels, SDL_Su
 	}
 
 
-	//memcpy(mPixels, loadedSurface->pixels, loadedSurface->pitch * loadedSurface->h);
+
 	return pixelArray;
-	//SDL_UnlockSurface(surface);
+
 }
 
 Uint32 * Bloom::BrightPass(Texture * texture, SDL_Surface * surface, int brightPassThreshold)
 {
 	
 	Uint8 r, g, b, a = 0;
+	Uint8 rTest, gTest, bTest, aTest = 0;
 	int w = texture->getWidth();
 	int h = texture->getHeight();
 
@@ -181,12 +182,10 @@ Uint32 * Bloom::BrightPass(Texture * texture, SDL_Surface * surface, int brightP
 
 	int totalPixels = texture->getTotalPixels();
 
-	// NEEDS MPIXELS
-	Uint32* tempPixelArray = NULL;
-	tempPixelArray = (Uint32*)texture->getPixels();
-
-	Uint32* pixelArray = nullptr;
-	pixelArray = new Uint32[totalPixels];
+	// requires mPixels
+	Uint32* tempPixelArray = (Uint32*)texture->getPixels();
+	// does not need mPixels
+	Uint32* pixelArray = new Uint32[totalPixels];
 
 	for (int x = 0; x < w; x++)
 	{
@@ -197,9 +196,14 @@ Uint32 * Bloom::BrightPass(Texture * texture, SDL_Surface * surface, int brightP
 			b = tempPixelArray[y * w + x] >> 0;
 			a = tempPixelArray[y * w + x] >> 24;
 
-			Uint8 rTest = r * luminance[0];
-			Uint8 gTest = g * luminance[1];
-			Uint8 bTest = b * luminance[2];
+			rTest = pixelArray[y * w + x] >> 16;
+			gTest = pixelArray[y * w + x] >> 8;
+			bTest = pixelArray[y * w + x] >> 0;
+			aTest = pixelArray[y * w + x] >> 24;
+
+			rTest = r * luminance[0];
+			gTest = g * luminance[1];
+			bTest = b * luminance[2];
 		
 			Uint8 test;
 			test = (rTest << 16) | (gTest << 8) | (bTest << 0) | (a << 24);
@@ -224,18 +228,17 @@ Uint32 * Bloom::BrightPass(Texture * texture, SDL_Surface * surface, int brightP
 	return pixelArray;
 }
 
-Uint32 * Bloom::ApplyBloom(Texture * texture, SDL_Surface * surface, int totalPixels)
+Uint32 * Bloom::ApplyBloom(Texture * texture, SDL_Surface * surface, int totalPixels, int bloomMultiplier)
 {
 	Uint8 r, g, b, a = 0;
+	float mulR, mulG, mulB, mulA = 0;
 	int w = texture->getWidth();
 	int h = texture->getHeight();
 
-	// NEEDS MPIXELS
-	Uint32* tempPixelArray = NULL;
-	tempPixelArray = (Uint32*)texture->getPixels();
-
-	Uint32* pixelArray = nullptr;
-	pixelArray = new Uint32[totalPixels];
+	// tempPixelArray needs mPixels to get access to surface pixels
+	Uint32* tempPixelArray = (Uint32*)texture->getPixels();
+	
+	Uint32* pixelArray = new Uint32[totalPixels];
 
 	for (int x = 0; x < w; x++)
 	{
@@ -246,16 +249,21 @@ Uint32 * Bloom::ApplyBloom(Texture * texture, SDL_Surface * surface, int totalPi
 			b = tempPixelArray[y * w + x] >> 0;
 			a = tempPixelArray[y * w + x] >> 24;
 
-			const float BLEND = 0.3;
-		
-			r += r * BLEND;
-			g += g * BLEND;
-			b += b * BLEND;
-			a += a * BLEND;
 
+			mulR = pixelArray[y * w + x] >> 16;
+			mulG = pixelArray[y * w + x] >> 8;
+			mulB = pixelArray[y * w + x] >> 0;
+			mulA = pixelArray[y * w + x] >> 24;
+
+			const float BLEND = 0.3;
+
+			mulR = r *bloomMultiplier;
+			mulG = g *bloomMultiplier;
+			mulB = b *bloomMultiplier;
+			mulA = a *bloomMultiplier;
 
 			Uint32 RGBA;
-			RGBA = (r << 16) | (g << 8) | (b << 0) | (a << 24);
+			RGBA = ((Uint32)mulR << 16) | ((Uint32)mulG << 8) | ((Uint32)mulB << 0) | ((Uint32)mulA << 24);
 			pixelArray[y * w + x] = RGBA;
 		}
 

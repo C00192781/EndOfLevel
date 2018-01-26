@@ -65,6 +65,7 @@ public:
 
 	int kernelRadius;
 	int kernelSize;
+	int bloomMultiplier;
 
 	Bloom bloom;
 	Growing grow;

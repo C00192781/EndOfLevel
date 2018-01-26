@@ -25,6 +25,7 @@ void Game::Initialize()
 	rect.w = 2700;
 
 	kernelRadius = 1;
+	bloomMultiplier = 3;
 }
 
 
@@ -78,6 +79,10 @@ void Game::Update()
 				b -= 8;
 				break;
 
+			case SDLK_q:
+				bloomMultiplier++;
+				break;
+
 			case SDLK_o:
 				kernelRadius++;
 				cout << kernelRadius << endl;
@@ -86,14 +91,14 @@ void Game::Update()
 				// Testing
 			case SDLK_l:
 
-				kernelSize = kernelRadius * 2 + 1;
+				//kernelSize = kernelRadius * 2 + 1;
 
 				Uint32 *pixelArray = nullptr;
 				int totalPixels = myTexture.getTotalPixels();
 				pixelArray = new Uint32[totalPixels];
 				pixelArray = bloom.BrightPass(&myTexture, stretchedSurface, 1);
 				pixelArray = bloom.Blur(&myTexture, kernelRadius, totalPixels, stretchedSurface);
-			//	pixelArray = bloom.ApplyBloom(&myTexture, stretchedSurface, totalPixels);
+				pixelArray = bloom.ApplyBloom(&myTexture, stretchedSurface, totalPixels, bloomMultiplier);
 				SDL_UpdateTexture(myTexture.getTexture(), &myTexture.getRect(), pixelArray, myTexture.getPitch());
 
 				break;
@@ -119,7 +124,7 @@ void Game::Render()
 
 	myTexture.setColour(r, g, b);
 	/*SDL_Point center = { 0, 0 };*/
-	//SDL_RenderCopy(renderer, myTexture.getTexture(), NULL, &myTexture.getRect());
-	SDL_RenderCopyEx(renderer, myTexture.getTexture(), &rect, &stretchedRect, 0, NULL, SDL_FLIP_NONE);
+	SDL_RenderCopy(renderer, myTexture.getTexture(), NULL, &myTexture.getRect());
+	//SDL_RenderCopyEx(renderer, myTexture.getTexture(), &rect, &stretchedRect, 0, NULL, SDL_FLIP_NONE);
 	SDL_RenderPresent(renderer);
 }
