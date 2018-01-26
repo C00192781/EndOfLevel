@@ -21,8 +21,8 @@ void Game::Initialize()
 	
 	rect.x = 0;
 	rect.y = 0;
-	rect.h = 563;
-	rect.w = 1000;
+	rect.h = 1800;
+	rect.w = 2700;
 
 	kernelRadius = 1;
 }
@@ -35,11 +35,13 @@ void Game::Load()
 	SDL_Surface* optimizedSurface = NULL;
 	SDL_Surface* loadedSurface = IMG_Load("ASSETS/texture.png");
 
-	optimizedSurface = SDL_ConvertSurface(loadedSurface, screen->format, NULL);       
+	optimizedSurface = SDL_ConvertSurface(loadedSurface, screen->format, NULL); 
+
 	// No longer need loadedSurface so we git rid of it
 	SDL_FreeSurface(loadedSurface);
 
 	stretchedSurface = optimizedSurface;
+
 }
 
 
@@ -91,7 +93,7 @@ void Game::Update()
 				pixelArray = new Uint32[totalPixels];
 				pixelArray = bloom.BrightPass(&myTexture, stretchedSurface);
 				pixelArray = bloom.Blur(&myTexture, kernelRadius, totalPixels, stretchedSurface);
-				//pixelArray = bloom.BloomEffect(&myTexture, stretchedSurface, totalPixels);
+				pixelArray = bloom.BloomEffect(&myTexture, stretchedSurface, totalPixels);
 				SDL_UpdateTexture(myTexture.getTexture(), &myTexture.getRect(), pixelArray, myTexture.getPitch());
 
 				break;
@@ -103,20 +105,21 @@ void Game::Update()
 
 void Game::Render()
 {
-	static float xPos = 0.0f;
-	static float yPos = 0.0f;
-	static float startWidth = myTexture.getWidth();
-	static float startHeight = 0;
-	static float endWidth = myTexture.getWidth();
-	static float endHeight = myTexture.getHeight();	
+	static float xPos = 300;
+	static float yPos = 300;
+	static float startWidth = 50;
+	static float startHeight = 50;
+	static float endWidth = 300;
+	static float endHeight = 300;	
 
-	grow.Animation(&myTexture, screen, stretchedSurface, &stretchedRect, &xPos, &yPos, &startWidth, &startHeight, &endWidth, &endHeight, 1, 1);
+	grow.Animation(&myTexture, screen, stretchedSurface, &stretchedRect, &xPos, &yPos, &startWidth, &startHeight, &endWidth, &endHeight, 2, 3);
 
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	SDL_RenderClear(renderer);
 
 	myTexture.setColour(r, g, b);
-	//SDL_RenderCopy(renderer, myTexture.getTexture(), &rect, &stretchedRect);
+	SDL_Point center = { 0, 0 };
+	//SDL_RenderCopy(renderer, myTexture.getTexture(), NULL, &myTexture.getRect());
 	SDL_RenderCopyEx(renderer, myTexture.getTexture(), &rect, &stretchedRect, 0, NULL, SDL_FLIP_NONE);
 	SDL_RenderPresent(renderer);
 }

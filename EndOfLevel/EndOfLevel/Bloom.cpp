@@ -176,6 +176,7 @@ Uint32 * Bloom::BrightPass(Texture * texture, SDL_Surface * surface)
 	int w = texture->getWidth();
 	int h = texture->getHeight();
 
+	// 
 	float luminance[] = { 0.2126f, 0.7152f, 0.0722f };
 
 

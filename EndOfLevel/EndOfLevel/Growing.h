@@ -15,4 +15,5 @@ public:
 private:
 	uint32_t lastTickTime, delta;
 	bool complete;
+	float offsetX, offsetY;
 };
